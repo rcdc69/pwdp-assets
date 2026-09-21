@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8">
+<title>Setting up your Google Maps keys</title>
+<style>
+  @page { size: A4; margin: 16mm 16mm 18mm; }
+  body { font-family: "Liberation Sans", Arial, sans-serif; color: #222; font-size: 11pt; line-height: 1.5; }
+  h1 { font-size: 20pt; margin: 0 0 4px; color: {{BRAND}}; }
+  .sub { color: #555; margin: 0 0 18px; }
+  h2 { font-size: 14pt; margin: 26px 0 8px; padding-bottom: 4px; border-bottom: 2px solid {{BRAND}}; page-break-after: avoid; }
+  ol { padding-left: 22px; margin: 6px 0; }
+  li { margin: 0 0 8px; }
+  .box { background: {{BRAND_TINT}}; border-left: 4px solid {{BRAND}}; padding: 8px 12px; margin: 8px 0; page-break-inside: avoid; }
+  .type { font-family: "Liberation Mono", monospace; font-size: 11pt; background: #fff; border: 1px solid #ccc; padding: 2px 6px; display: inline-block; margin: 2px 0; }
+  figure { margin: 8px 0 14px; page-break-inside: avoid; }
+  figure img { max-width: 75%; border: 1px solid #bbb; border-radius: 4px; }
+  figcaption { font-size: 9.5pt; color: #666; margin-top: 3px; }
+  .w60 img { max-width: 60%; }
+  b { color: #111; }
+  .note { font-size: 10pt; color: #555; }
+  .page-break { page-break-before: always; }
+</style></head><body>
+
+<h1>Setting up your Google Maps keys</h1>
+<p class="sub">For the new {{AGENT_NAME}} website. Takes about 15 minutes.</p>
+
+<p>The map on the property listings and the nearby schools and transport on each property page are provided by Google. They need two "keys" (long codes that start with <b>AIza</b>) from a Google account in your name. Once you send them to me I put them into the website and there is nothing more to do.</p>
+
+<div class="box">
+<b>What it costs.</b> Google gives the first 10,000 map views each month free, and the schools and transport lookups have their own free allowance. A website of your size stays well inside both, so the bill is £0. Google will still ask for a card when you sign up, because that is how they set up every account.
+</div>
+
+<p>You will be asked to do four things:</p>
+<ol>
+  <li>Create the Google account for maps and add a card</li>
+  <li>Switch on the two Google services the website uses</li>
+  <li>Create Key 1 (for the map) and lock it to your website</li>
+  <li>Create Key 2 (for schools and transport) and lock it to our server</li>
+</ol>
+<p>Then email me the two keys.</p>
+
+<p class="note">The Google screens look slightly different from time to time, and yours may be light rather than dark like the pictures here. The words on the buttons stay the same, so go by the words.</p>
+
+<h2>Part 1. Create the account and add a card</h2>
+<ol>
+  <li>Open this address in your browser:<br><span class="type">https://console.cloud.google.com/google/maps-apis/start</span></li>
+  <li>Sign in with the Google account you want this to belong to. The Gmail or Google account you already use for the business is ideal, so that it stays with {{AGENT_SHORT}}.</li>
+  <li>If Google asks you to agree to its terms, choose <b>United Kingdom</b> as the country, tick to agree and click <b>Agree and continue</b>.</li>
+  <li>Google will then ask you to set up billing. Choose <b>Business</b> if it asks for an account type, fill in the business name and address, and enter a debit or credit card. Click <b>Start</b> or <b>Submit</b> at the end.</li>
+  <li>Google may offer a free trial or credit. You can accept it; it makes no difference.</li>
+  <li>Google may now show you a key straight away, or ask you some questions about what you are building. If it asks, you can skip or close these. If it shows you a key, click <b>Close</b> or <b>Go to Google Maps Platform</b>. We set both keys up properly in Parts 3 and 4.</li>
+</ol>
+
+<h2>Part 2. Switch on the two services</h2>
+<ol>
+  <li>Click the three lines (the menu) at the top left of the screen, then <b>APIs &amp; Services</b>, then <b>Library</b>.</li>
+  <li>In the search box type <span class="type">Maps JavaScript API</span> and press Enter. Click on <b>Maps JavaScript API</b> in the results.</li>
+  <li>Click the blue <b>Enable</b> button. If the button says <b>Manage</b> instead, it is already switched on and you do not need to do anything.</li>
+  <li>Go back to the Library and search for <span class="type">Places API (New)</span>. Click on the one called <b>Places API (New)</b>. Be careful to choose the one with <b>(New)</b> on the end, not the one called just "Places API".</li>
+  <li>Click <b>Enable</b> (or it already says <b>Manage</b>).</li>
+</ol>
+
+<h2>Part 3. Key 1: the map</h2>
+<ol>
+  <li>Click the menu at the top left, then <b>APIs &amp; Services</b>, then <b>Credentials</b>.</li>
+  <li>Near the top, click <b>+ Create credentials</b> and choose <b>API key</b>.</li>
+  <li>Google shows "API key created" with the new key. Click <b>Close</b>. You can come back to the key at any time, so there is no need to copy it yet.</li>
+  <li>The new key now appears in the list under <b>API Keys</b>, probably called "API key 1". Click on its name to open it.</li>
+  <li>In the <b>Name</b> box at the top, change the name to <span class="type">{{AGENT_SHORT}} website map</span></li>
+  <li>Under <b>Application restrictions</b>, choose <b>Websites</b>:
+    <figure class="w60"><img src="websites-restriction.png"><figcaption>Choose Websites</figcaption></figure>
+  </li>
+  <li>A <b>Website restrictions</b> section appears underneath. Click <b>Add</b>, type the first line below exactly, and click <b>Done</b>. Repeat for each line, so you end up with three:
+    <div class="box">
+      <span class="type">{{DOMAIN}}/*</span><br>
+      <span class="type">*.{{DOMAIN}}/*</span><br>
+      <span class="type">*.pwdp.co.uk/*</span>
+    </div>
+    <span class="note">The first two are your website. The third is the preview address the new site is on now, so the map keeps working while we finish it.</span>
+  </li>
+  <li>Further down, under <b>API restrictions</b>, choose <b>Restrict key</b>. Click the box that says <b>Select APIs</b>, tick <b>Maps JavaScript API</b> and nothing else, then click <b>OK</b>:
+    <figure><img src="api-maps-javascript.png"><figcaption>Maps JavaScript API ticked, nothing else</figcaption></figure>
+  </li>
+  <li>Click the blue <b>Save</b> button at the bottom.</li>
+</ol>
+
+<h2>Part 4. Key 2: schools and transport</h2>
+<p>This key is used by our server, not by people's browsers, so it is locked to the server's address instead of your website.</p>
+<ol>
+  <li>Back on the <b>Credentials</b> page, click <b>+ Create credentials</b> and choose <b>API key</b> again. Click <b>Close</b> on the box that appears.</li>
+  <li>Click on the name of this second new key to open it.</li>
+  <li>Change the <b>Name</b> to <span class="type">{{AGENT_SHORT}} website server</span></li>
+  <li>Under <b>Application restrictions</b>, choose <b>IP addresses</b>.</li>
+  <li>Under <b>IP address restrictions</b>, click <b>Add</b>, type <span class="type">{{SERVER_IP}}</span> and click <b>Done</b>. It should then look like this:
+    <figure><img src="ip-restrictions.png"><figcaption>IP addresses chosen, with {{SERVER_IP}} added</figcaption></figure>
+  </li>
+  <li>Under <b>API restrictions</b>, choose <b>Restrict key</b>, click <b>Select APIs</b>, tick <b>Places API (New)</b> and nothing else, then click <b>OK</b>:
+    <figure><img src="api-places-new.png"><figcaption>Places API (New) ticked. Not the one called just "Places API".</figcaption></figure>
+  </li>
+  <li>Click <b>Save</b>.</li>
+</ol>
+<p class="note">Google says the settings can take up to 5 minutes to start working, so if anything looks odd straight away, that is why.</p>
+
+<h2>Part 5. Send me the two keys</h2>
+<ol>
+  <li>On the <b>Credentials</b> page you will now see both keys listed by the names you gave them.</li>
+  <li>Next to <b>{{AGENT_SHORT}} website map</b>, click <b>Show key</b>, then the copy button, and paste it into an email to me with the words "Map key".</li>
+  <li>Do the same for <b>{{AGENT_SHORT}} website server</b> and label it "Server key".</li>
+  <li>Send the email to <b>{{REPLY_EMAIL}}</b>.</li>
+</ol>
+<p class="note">It is fine to email the keys. Because of the restrictions above, Key 1 only works on your website and Key 2 only works from our server, so they are no use to anybody else.</p>
+
+<p>If you get stuck at any point, just give me a call on {{PHONE}} and I will talk you through it.</p>
+
+</body></html>
